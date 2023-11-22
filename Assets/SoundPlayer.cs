@@ -29,7 +29,6 @@ public class SoundPlayer : MonoBehaviour
             audioSource.spatialize = true;
             audioSource.spatialBlend = 1.0f; // 1.0 means full 3D spatialization
             audioSource.spatializePostEffects = true;
-            audioSource.spatialize = true;
             audioSource.maxDistance = 400.0f;
             //GameObject player = GetComponent<GameObject>();
             

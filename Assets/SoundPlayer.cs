@@ -20,6 +20,10 @@ public class SoundPlayer : MonoBehaviour
         [SerializeField]
         float Radius = 5.0f;
         // used awake to read and load the file 
+        private Vector3 playerPosition;
+        private Vector3 soundPosition;
+        private float distance = 0f;
+
         void Awake()
         {
             // Load an audio file  from a text file
@@ -98,9 +102,9 @@ public class SoundPlayer : MonoBehaviour
         private void LateUpdate()
         {
             RotateAround();
-            Vector3 playerPosition = Camera.main.transform.position; // player position
-            Vector3 soundPosition = transform.position; // source of audio // rotating cube
-            float distance = Vector3.Distance(playerPosition, soundPosition);
+            playerPosition = Camera.main.transform.position; // player position
+            soundPosition = transform.position; // source of audio // rotating cube
+            distance = Vector3.Distance(playerPosition, soundPosition);
            // Debug.Log(soundPosition.ToString());
            //audioSource.transform.position = soundPosition
            audioSource.volume = Mathf.Clamp01(1.0f - distance / maxDistance);   //  adjust volume based on distance
@@ -118,7 +122,9 @@ public class SoundPlayer : MonoBehaviour
         
                 // Make the cube look at the center cube to face it while rotating
                 transform.LookAt(player);
+                #if UNITY_EDITOR
                 Debug.Log("New Position: " + newPosition);
+                #endif
             }
 }
 
